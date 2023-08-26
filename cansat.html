@@ -13,11 +13,28 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
 	</head>
+	<style>
+		:root{
+			scroll-behavior: smooth;
+		}
+		div.fixed 
+		{
+			position: fixed;
+			bottom: 25px;
+			right: 75px;
+			width: 64px;
+			height: 64px;
+			background-color: aqua;
+			border-radius: 50%;
+		}
+	</style>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
-
+			<div id="wrapper" class="fade-in">				
+				<div class="fixed">
+					<p href="#top"> <i class="button icon solid solo fa-arrow-up"></i></p>
+				</div>
 				<!-- Intro -->
 					<div id="intro">
 						<h1>Welcome to my<br />
