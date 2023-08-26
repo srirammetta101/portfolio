@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(1, 101)  # Domain definition
+y = np.concatenate((np.zeros(30), np.arange(0, np.pi + np.pi / 31, np.pi / 31), np.zeros(38)))
+u = np.zeros((10, 100))  # Initialization as an array
+
+# Initializing the first time step using sine of y
+u[0, :] = np.sin(y)
+a = 0.1
+dt = 1
+dx = 1
+c = -1
+
+for t in range(1, 10):
+    for i in range(1, 99):
+        u[t, i] = u[t - 1, i] - 0.5 * ((c * dt) / dx) * (u[t - 1, i + 1] - u[t - 1, i - 1])
+
+# Visualizing over each time step
+for k in range(10):
+    time_step = k + 1
+    plt.plot(x, u[k, :], label=f'Time Step {time_step}', linestyle='-', linewidth=1)
+
+plt.title('Hyperbolic Wave Equation', fontweight='bold')
+plt.xlabel('1D Spatial Domain', fontweight='bold')
+plt.ylabel('Amplitude', fontweight='bold')
+plt.show()

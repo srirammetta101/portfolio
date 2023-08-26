@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(1, 101)  # Domain definition
+T = np.zeros((1000, 100))  # Initialization as an array
+
+# Initializing the first time step using the given formula
+T[0, :] = 75 * np.exp(-0.009 * ((x - 50) ** 2)) + 25
+
+# Defining Timestep (dt), Cell size(dx), PDE parameter (alpha)
+a = 0.1
+dt = 1
+dx = 1
+
+# Solving Parabolic PDE
+for t in range(1, 1000):
+    for i in range(1, 99):
+        T[t, 0] = 25
+        T[t, 99] = 25
+        T[t, i] = T[t - 1, i] + (a * dx / (dt ** 2)) * (T[t - 1, i + 1] - 2 * T[t - 1, i] + T[t - 1, i - 1])
+
+# Visualizing over every 100 timesteps
+for k in range(0, 1000, 100):
+    time_in_seconds = k * dt
+    plt.plot(x, T[k, :], label=f'Time: {time_in_seconds:.0f} s')
+
+plt.xlabel('x')
+plt.ylabel('Temperature (T)')
+plt.title('Temperature Evolution over Time')
+plt.legend()  # Place the legend in the upper right corner
+plt.show()

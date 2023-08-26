@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+l = 10.0
+b = 10.0
+N = 41
+dx = l / (N - 1)
+dy = b / (N - 1)
+
+x = np.zeros((N, N))
+y = np.zeros((N, N))
+
+for i in range(N):
+    for j in range(N):
+        x[i, j] = dx * j
+        y[i, j] = dy * i
+
+T = np.ones((N, N))
+T[0, :] = 100
+T[:, 0] = 50
+T[N - 1, :] = 75
+T[:, N - 1] = 50
+
+A = 2 / (dx ** 2) + 2 / (dy ** 2)
+
+for ct in range(1000):
+    for j in range(1, N - 1):
+        for i in range(1, N - 1):
+            T[i, j] = (
+                ((T[i + 1, j] + T[i - 1, j]) / (dx ** 2))
+                + ((T[i, j + 1] + T[i, j - 1]) / (dy ** 2))
+            ) / A
+
+plt.contourf(x, y, T, levels=20, cmap='rainbow')
+plt.colorbar(label='Temperature')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Temperature Contour')
+plt.show()
