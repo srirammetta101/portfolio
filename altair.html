@@ -1,0 +1,214 @@
+﻿<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Metta Sriram Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>Welcome to my<br />
+						Portfolio</h1>
+						<p>A space where I keep updating my projects, Big and Small, Good ones and the Bad ones<br />
+						I also add the stuff I want to brag about...</p>
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+				
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li class="active"><a href="projects.html">Projects</a></li>
+							<li><a href="other.html">The Other Stuff</a></li>
+							<li><a href="elements.html">Elements</a></li>
+							
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/metta-sriram/" target="_blank" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
+							<li><a href="https://github.com/srirammetta101/ " target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">			
+
+						<!-- Post -->
+							<section class="post">
+								<h1>Investment Casting </h1>
+									<p>
+										Investment casting, a precision manufacturing method, produces complex metal parts with fine details. It involves creating a wax pattern, 
+										encasing it in ceramic, melting the wax, and pouring molten metal into the mold. This process ensures intricate shapes and is used in 
+										industries where precision is required. Altair Inspire Cast is a simulation software tailored for casting processes. It aids engineers 
+										in optimizing casting designs by predicting potential defects like porosity, shrinkage, and flow issues. By simulating and analyzing 
+										these factors, it enables efficient and cost-effective production of high-quality metal components in industries.
+									
+
+									<div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-6"><span class="image fit"><img src="images/altair/modeljpg.jpg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="images/altair/meshinh.jpg" alt="" /></span></div>
+											<!--break-->
+											<div class="col-6"><span><header class="major"> <p> <b>Computational Model</b></p> </header> </span></div>
+                                            <div class="col-6"><span><header class="major"> <p> <b>Meshing of the Model</b></p> </header> </span></div>
+										
+										</div>
+									</div>
+
+									
+										The initial conditions are: Molten brass  (liquid state) at 1406.15 K. The pouring velocity of the liquid metal is set at 1 m/s, while 
+										the temperature of the mold is 293.15 K. 
+										The boundary conditions are: the mold containing the cast, now placed in a room with an ambient temperature of 293 K. 
+										The heat transfer mechanisms at play are convection, from the molten metal to the mold and then from the mold to the surrounding air, 
+										along with conduction between the solidifying metal and the mold itself. 
+										The effect of radiation on the solidification process of the metal is assumed to be negligible. 
+									</p>
+
+										Simulation of the basic model was done in Altair and the results were validated accordingly. The results of the simulations are presented here:
+										
+										<div class="box alt">
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-6"><span class="image fit"><img src="images/altair/FT.gif" alt="" /></span></div>
+												<div class="col-6"><span class="image fit"><img src="images/altair/FLF.gif" alt="" /></span></div>
+												<!--break-->
+												<div class="col-6"><span><header class="major"> <p> <b>Temperature variation during Filling</b></p> </header> </span></div>
+												<div class="col-6"><span><header class="major"> <p> <b>Liquid Fraction variation during Filling</b></p> </header> </span></div>
+											</div>
+
+											<div class="row gtr-50 gtr-uniform">
+												<div class="col-6"><span class="image fit"><img src="images/altair/ST.gif" alt="" /></span></div>
+												<div class="col-6"><span class="image fit"><img src="images/altair/SLF.gif" alt="" /></span></div>
+												<!--break-->
+												<div class="col-6"><span><header class="major"> <p> <b>Temperature variation during Solidification</b></p> </header> </span></div>
+												<div class="col-6"><span><header class="major"> <p> <b>Liquid Fraction variation during Solidification</b></p> </header> </span></div>
+											</div>
+										</div>
+
+									</p>
+
+									<p>
+										<h2>Design of Experiments (DOE)</h2>
+										A Design of Experiments (DOE) study involves systematically planning and conducting experiments to gather data in an efficient and 
+										structured manner. Its purpose is to explore relationships between variables, optimize processes, or make informed decisions based 
+										on empirical evidence. In this case, we have considered six factors and one output variable. Those six factors are: Angle, Height, 
+										Eccentricity, Depth, Outer Diameter and Fillet Radius. The output selected here is the time taken for solidification of the material.
+										<div class="col-6"><span class="image fit"><img src="images/altair/doe.png" alt="" /></span></div>
+
+										An L<sub>18</sub> orthogonal matrix is constructed using Taguchi Design to conduct DOE using Minitab 18.0 software. The levels considered
+										for this scenario are shown below in the image. On completing the Taguchi design using the table shown below, we obtain a combination of 
+										the factors and their levels. Then, simulations are done for those combinations and the significant factors are found on completing 
+										Taguchi Analysis to the finalized orthogonal array. Regression modelof Multiple Linear Regression was implemented on the orthogonal matrix. 
+										Further, an optimization study was conducted to obtain the ideal conditions to obtain the fastest solidification with less defects during 
+										the casting. The optimization results denote that, the significant factors affecting the solidification time are: Height, eccentricity, depth and outer diameter. 
+										The optimized values of these significant factors are 18mm, 4mm, 3mm and 25mm respectively. 
+										
+										<div class="col-6"><span class="image fit"><img src="images/altair/taguchi.png" alt="" /></span></div>
+									</p>
+
+									<p>
+										<h2>Shape Analysis</h2>
+										<span class="image right"><img src="images/altair/shape.jpg" alt="" /></span>
+										Shape analysis has been conducted based on the results from the previous studies and the cross section shape is changed from rectangular, 
+										square, circular and elliptical as shown below. Cross sectional area has been kept constant to ensure the volume of the cast remains same.
+										We observed that the base of the cross section of the mold needs to be wider irrespective of its shape. However, manufacturing an 
+										elliptical or circular cross sectioned mold is a challenging task and it requires special techniques to achieve the expected results. 
+										So, it would be a wiser option to go with the rectangular cross section as it is easy to manufacture and can be customized to our needs 
+										without much effort and we can obtain better results with rectangular cross-sectional mold. 
+									</p>
+																	
+							</section>
+
+							<header class="major">
+								<h3>Fin.</h3>
+							</header>
+
+							<section class="posts">
+								<article>
+									<header>
+										<h2><a>Projects</a></h2>
+									</header>
+									<a class="image fit"><img src="images/project tenor1.gif" alt="" /></a>
+									<p> All the projects I have been part of and have contributed in, over the past few years. </p>
+									<ul class="actions special">
+										<li><a href="projects.html" class="button">Read More</a></li>
+									</ul>
+								</article>
+								
+								<article>
+									<header>
+										<h2><a>The Other Stuff</a></h2>
+									</header>
+									<a class="image fit"><img src="images/otheristuff.gif" alt="" /></a>
+									<p> I do some stuff other than the useful things. Go ahead and take a peek.</p>
+									<ul class="actions special">
+										<li><a href="other.html" class="button">Read More</a></li>
+									</ul>
+								</article>
+								
+							</section>
+
+						<!-- Footer -->
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section>
+								<h3>Location</h3>
+								<p>Pahadon ke upar, Jungle ke paar</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="tel: +917008631760">+91 7008631760</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="mailto: srirammetta101@gmail.com">srirammetta101@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://www.linkedin.com/in/metta-sriram/" target="_blank" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
+									<li><a href="https://www.instagram.com/m_ess_or/" target="_blank" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="https://github.com/srirammetta101/ " target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; metta-sriram</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

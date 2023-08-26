@@ -1,0 +1,552 @@
+﻿<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Metta Sriram Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	</head>
+	<style>
+		.title{
+			font-size: 24px; 
+			font-weight: bold;
+		}
+		.title2{
+			font-size: 24px; 
+			font-weight: bold;
+		}
+		.title3{
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.fraction {
+			display: inline-block;
+			font-size: 1.2em;
+			padding: 0 0.2em;
+			text-align: center;
+			vertical-align: middle;
+
+			&:before {
+				border-bottom: 1px solid #000;
+				content: attr(top);
+				display: block;
+				line-height: 1.6em;
+				padding: 0 0.2em;
+			}
+			&:after {
+				content: attr(bottom);
+				display: block;
+				line-height: 1.6em;
+				padding: 0 0.2em;
+			}
+		}
+
+	</style>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>Welcome to my<br />
+						Portfolio</h1>
+						<p>A space where I keep updating my projects, Big and Small, Good ones and the Bad ones<br />
+						I also add the stuff I want to brag about...</p>
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+				
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li class="active"><a href="projects.html">Projects</a></li>
+							<li><a href="other.html">The Other Stuff</a></li>
+							<li><a href="elements.html">Elements</a></li>
+							
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/metta-sriram/" target="_blank" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
+							<li><a href="https://github.com/srirammetta101/ " target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">			
+
+						<!-- Post -->
+							<section class="post">
+								<h1>CFD Codes in Python </h1>
+									<p>
+                                        In my 6<sup>th</sup> semster, I have taken up the elective course under Dr. Yogesh G Bhumkar, Associate Professor, School of Mechanical Sciences.
+                                        I was introduced to Python for developing inhouse codes to the problems. Python plays a pivotal role in Computational Fluid Dynamics (CFD), 
+										offering versatile libraries like OpenFOAM, PyTorch, and NumPy. It enables efficient simulation, data manipulation, and visualization, 
+										accelerating CFD research and analysis. Python's simplicity and extensibility make it an essential tool for engineers and researchers 
+										in the field. Prior to this I was used in doing simulations in ANSYS, where I 
+                                        used commercial CFD codes to solve the problems. Some of the problems I have worked on, are Dirichlet Problem, Neumann Problem, Poisson Equation,
+										and solving Laplacian Heat Equation in different scenarios. The setup for the first three problem scenarios is as follows: <br/>
+										A 2 dimensional square plate is considered as the grid for our understanding. Temperature applied on the ends, change according to the 
+										boundary conditions set by us. 
+                                    </p>
+
+									<!-- Classification of PDEs-->
+									<p>
+										
+										<div class="title">Classification of PDEs</div>
+
+										The Laplace equation is a second-order partial differential equation that appears in various physical and mathematical contexts. 
+										The laplace equation is given by: ∇<sup>2</sup>u=0. Where u is a scalar function of multiple variables
+										and ∇<sup>2</sup> represents the Laplacian operator, which is the divergence of the gradient of u.									
+										It can be classified into three types based on the nature of the solutions: elliptic, parabolic, and hyperbolic. <br/>
+										<br/>
+										<!-- Elliptic-->
+										<div class="title2">1. Elliptic PDE</div>
+										
+										The elliptic type of the Laplace equation typically describes steady-state or equilibrium problems where the solution does not 
+										change with time. One example is the 2D steady-state heat distribution in a rectangular plate. We will solve this elliptic PDE in three
+										different scenarios: Dirichlet Boundary Condition, Neumann Boundary Condition and Dirichlet Boundary Condition with Heat Source.
+										<br/>
+										<br/>
+					
+									<!-- Dirichlet-->
+										<div class="title3">A. Dirichlet Problem</div>
+
+										The Dirichlet boundary conditions specify the values of the function (or field) being studied at the boundaries of the plate. Here, the temperatures
+										of the 4 sides of the plate are fixed. The code is:
+										<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+l = 10.0
+b = 10.0
+N = 41
+dx = l / (N - 1)
+dy = b / (N - 1)
+
+x = np.zeros((N, N))
+y = np.zeros((N, N))
+
+for i in range(N):
+	for j in range(N):
+		x[i, j] = dx * j
+		y[i, j] = dy * i
+
+T = np.ones((N, N))
+T[0, :] = 100
+T[:, 0] = 50
+T[N - 1, :] = 75
+T[:, N - 1] = 50
+
+A = 2 / (dx ** 2) + 2 / (dy ** 2)
+
+for ct in range(1000):
+	for j in range(1, N - 1):
+		for i in range(1, N - 1):
+			T[i, j] = (((T[i + 1, j] + T[i - 1, j]) / (dx ** 2))+ ((T[i, j + 1] + T[i, j - 1]) / (dy ** 2))) / A
+
+plt.contourf(x, y, T, levels=20, cmap='rainbow')
+plt.colorbar(label='Temperature')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Temperature Contour')
+plt.show()</code></pre>
+										
+										<div class="image main"><img src="images/cfd/dirichlet.png" alt="" /></div>
+									</p>
+
+									<!-- Neumann-->
+									<p>
+										<div class="title3">B. Neumann Boundary Condition</div>
+										The Neumann boundary conditions specify the derivative of a function (or field) at the boundary of a domain, rather than the function's 
+										actual value. These conditions are often used to model scenarios where there is a flux, flow, or gradient specified at the boundary.
+										Here, the upper and lower sides of the plate are adiabatic walls. Thereby, making the derivative of the temperature as zero.
+										The other two sides have temperature difference for us to observe the contours.
+										The code is:
+										<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+l = 10.0
+b = 10.0
+N = 11
+dx = l / (N - 1)
+dy = b / (N - 1)
+
+# Discretization of domain
+x = np.zeros((N, N))
+y = np.zeros((N, N))
+for i in range(N):
+	for j in range(N):
+		x[i, j] = dx * (j)
+		y[i, j] = dy * (i)
+
+# Boundary condition
+T = np.ones((N, N))
+T[:, 0] = 100
+T[:, -1] = 50
+
+# Iterative solving of PDE
+for ct in range(10000):
+	for j in range(1, N - 1):
+		for i in range(1, N - 1):
+			T[i, j] = (T[i + 1, j] + T[i - 1, j] + T[i, j + 1] + T[i, j - 1]) / 4
+	T[0, 1:N - 1] = T[1, 1:N - 1]
+	T[N - 1, 1:N - 1] = T[N - 2, 1:N - 1]
+
+# Plot the contour
+plt.contourf(x, y, T, cmap='hot')
+plt.colorbar(label='Temperature')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Temperature Contour')
+plt.show()</code></pre>
+										
+										<div class="image main"><img src="images/cfd/neumann.png" alt="" /></div>
+									</p>
+
+									
+									<!-- Poisson-->
+									<p>
+										<div class="title3">C. Poisson Equation</div>
+										The Poisson equation in the presence of a heat source and Dirichlet boundary conditions, essentially describing a scenario 
+										where there is a heat generation within a domain and the temperature is specified at the boundaries. Here, Heat generation is considered
+										to be coming from the middle of the plate and the dirichlet boundary condition applied on all four sides by keeping the temperature at 25°. 
+										The contours can be observed and the effect of heat source can be seen here.
+										The code is:
+										<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+l = 10.0
+b = 10.0
+N = 41
+dx = l / (N - 1)
+dy = b / (N - 1)
+
+# Discretization of domain
+x = np.zeros((N, N))
+y = np.zeros((N, N))
+for i in range(N):
+	for j in range(N):
+		x[i, j] = dx * (j)
+		y[i, j] = dy * (i)
+
+# Boundary condition
+T = np.ones((N, N))
+
+# Iterative solution of PDE
+A = (2 / (dx**2)) + (2 / (dy**2))
+for ct in range(10000):
+	for j in range(1, N - 1):
+		for i in range(1, N - 1):
+			T[i, j] = (((T[i + 1, j] + T[i - 1, j]) / (dx**2)) + ((T[i, j + 1] + T[i, j - 1]) / (dy**2))) / A + \ (100 / A) * np.exp(-8 * ((x[i, j] - 5)**2 + (y[i, j] - 5)**2))
+
+# Plot the contour
+plt.contourf(x, y, T, cmap='rainbow')
+plt.colorbar()
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Temperature Distribution')
+plt.show()</code></pre>
+										
+										<div class="image main"><img src="images/cfd/poisson 2d.png" alt="" /></div>
+									</p>
+
+									<p>
+										<!-- Parabola-->
+										<div class="title2">2. Parabolic PDE</div>
+										The parabolic type of the Laplace equation describes problems that involve diffusion-like processes where the solution evolves over time. 
+										An example is the 1D heat conduction equation: <div class="fraction" top="∂u" bottom="∂t"></div>=α∇<sup>2</sup> u. <br/>
+										Here, <div class="fraction" top="∂u" bottom="∂t"></div> represents the rate of change of temperature with respect to time, α is the thermal diffusivity, and ∇²u represents 
+										the Laplacian of temperature. This equation models the time-dependent heat conduction in a rod. The initial conditions are the temperature being 25°.
+										The other details can be found in the code:
+										<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(1, 101)  # Domain definition
+T = np.zeros((1000, 100))  # Initialization as an array
+
+# Initializing the first time step using the given formula
+T[0, :] = 75 * np.exp(-0.009 * ((x - 50) ** 2)) + 25
+
+# Defining Timestep (dt), Cell size(dx), PDE parameter (alpha)
+a = 0.1
+dt = 1
+dx = 1
+
+# Solving Parabolic PDE
+for t in range(1, 1000):
+	for i in range(1, 99):
+		T[t, 0] = 25
+		T[t, 99] = 25
+		T[t, i] = T[t - 1, i] + (a * dx / (dt ** 2)) * (T[t - 1, i + 1] - 2 * T[t - 1, i] + T[t - 1, i - 1])
+
+# Visualizing over every 100 timesteps
+for k in range(0, 1000, 100):
+	time_in_seconds = k * dt
+	plt.plot(x, T[k, :], label=f'Time: {time_in_seconds:.0f} s')
+
+plt.xlabel('x')
+plt.ylabel('Temperature (T)')
+plt.title('Temperature Evolution over Time')
+plt.legend()  # Place the legend in the upper right corner
+plt.show()</code></pre>
+																		
+										<div class="image main"><img src="images/cfd/parabola.png" alt="" /></div>
+									</p>
+
+									<p>
+										<!-- Hyperbola-->
+										<div class="title2">3. Hyperbolic PDE</div>
+										The hyperbolic type of the Laplace equation is associated with wave-like phenomena where disturbances propagate through space and 
+										time. An example is the 1D wave equation: <div class="fraction" top="∂²u" bottom="∂t²"></div> = c²∇²u. 
+										Here, <div class="fraction" top="∂²u" bottom="∂t²"></div> represents the acceleration of the wave-like disturbance, c is the wave speed, and 
+										∇²u represents the Laplacian of the disturbance. This equation models various wave phenomena, such as vibrations in a string, 
+										sound waves, and electromagnetic waves. The initial condition of this case here is a sinusoidal function. The other details can be found in the code:
+									
+										<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(1, 101)  # Domain definition
+y = np.concatenate((np.zeros(30), np.arange(0, np.pi + np.pi / 31, np.pi / 31), np.zeros(38)))
+u = np.zeros((10, 100))  # Initialization as an array
+
+# Initializing the first time step using sine of y
+u[0, :] = np.sin(y)
+a = 0.1
+dt = 1
+dx = 1
+c = -1
+
+for t in range(1, 10):
+	for i in range(1, 99):
+		u[t, i] = u[t - 1, i] - 0.5 * ((c * dt) / dx) * (u[t - 1, i + 1] - u[t - 1, i - 1])
+
+# Visualizing over each time step
+for k in range(10):
+	time_step = k + 1
+	plt.plot(x, u[k, :], label=f'Time Step {time_step}', linestyle='-', linewidth=1)
+
+plt.title('Hyperbolic Wave Equation', fontweight='bold')
+plt.xlabel('1D Spatial Domain', fontweight='bold')
+plt.ylabel('Amplitude', fontweight='bold')
+plt.show()</code></pre>
+																		
+										<div class="image main"><img src="images/cfd/hyperbola.png" alt="" /></div>
+									</p>
+
+									<!--streamline through chamber-->
+									<p>
+										<div class="title2">4. Streamlines through a chamber</div>
+										Here, we examine the behavior of a two-dimensional, inviscid, and incompressible fluid that flows steadily through a confined chamber 
+										positioned between an inlet and an outlet. This fluid flow is characterized by an absence of vorticity owing to its irrotational nature,
+										resulting in a vorticity value of zero. Consequently, the governing dynamics of the fluid are encapsulated by an Elliptic Partial 
+										Differential Equation, which defines its stream function as follows: 
+										<div class="fraction" top="∂²ψ" bottom="∂x²"></div>+<div class="fraction" top="∂²ψ" bottom="∂y²"></div>=0.
+										We approach this context with two distinct scenarios; Single Inlet Single Outlet configuration and Single Inlet Multiple Outlets configuration.	<br/>
+										
+										<!--streamline siso-->
+
+										In the first case, our consideration is directed towards openings strategically situated diagonally opposite to each other, maintaining 
+										a mutually facing alignment. This particular arrangement is mirrored by the observable pattern of streamlines. The code is as follows:
+										
+										<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+l = 10.0
+b = 10.0
+N = 41
+dx = l / (N - 1)
+dy = b / (N - 1)
+
+# Discretisation of domain
+x = np.zeros((N, N))
+y = np.zeros((N, N))
+for i in range(N):
+	for j in range(N):
+		x[i, j] = dx * j
+		y[i, j] = dy * i
+
+# Boundary condition
+p = np.ones((N, N))
+p[:, 0] = 2
+p[N - 1, 0:33] = 2
+p[0, 8:N] = 4
+p[:, N - 1] = 4
+p[0, 0:9] = np.arange(2, 4.25, 0.25)
+p[N - 1, 32:N] = np.arange(2, 4.25, 0.25)
+
+A = 2 / dx ** 2 + 2 / dy ** 2
+
+# Solution of PDE
+for ct in range(10000):
+	for i in range(1, N - 1):
+		for j in range(1, N - 1):
+			p[i, j] = ((p[i + 1, j] + p[i - 1, j]) / dx ** 2 + (p[i, j + 1] + p[i, j - 1]) / dy ** 2) / A
+
+# Plotting rainbow-filled contours and contour lines
+plt.contourf(x, y, np.rot90(p, 2), 50, cmap='rainbow')
+contour_lines = plt.contour(x, y, np.rot90(p, 2), 15, colors='black')
+plt.clabel(contour_lines, inline=True, fontsize=8)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Rainbow-Filled Contours with Contour Lines')
+plt.colorbar(label='Value')
+plt.show()</code></pre>
+										<div class="image main"><img src="images/cfd/streamline siso.png" alt="" /></div>
+
+										<!--stramline simo-->
+										
+										In the second scenario, the openings are assumed to be arranged similarly, but this time involving three outlets. This arrangement is 
+										also illustrated by the pattern of streamlines.
+										
+										<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+l = 10.0
+b = 10.0
+N = 41
+dx = l / (N - 1)
+dy = b / (N - 1)
+
+# Discretisation of domain
+x = np.zeros((N, N))
+y = np.zeros((N, N))
+for i in range(N):
+	for j in range(N):
+		x[i, j] = dx * j
+		y[i, j] = dy * i
+
+# Boundary condition
+p = np.ones((N, N))
+
+p[:, 0] = 2
+p[40, 0:7] = 2
+p[40,7:12] = np.arange(2 + 1/6, 2 + 5/6, 1/6)
+p[40,11:18] = 8/3
+p[40,18:23] = np.arange(8/3 + 1/6, 8/3 + 5/6, 1/6)
+p[40,22:29] = 10/3
+p[40,29:34] = np.arange(10/3 + 1/6, 10/3 + 5/6, 1/6)
+p[40,33:40] = 4
+p[0, 0:8] = np.arange(2, 3.75 + 0.25, 0.25)
+p[0, 8:40] = 4
+p[:, 40] = 4
+
+A = 2 / dx ** 2 + 2 / dy ** 2
+
+# Solution of PDE
+for ct in range(10000):
+	for i in range(1, N - 1):
+		for j in range(1, N - 1):
+			p[i, j] = ((p[i + 1, j] + p[i - 1, j]) / dx ** 2 + (p[i, j + 1] + p[i, j - 1]) / dy ** 2) / A
+
+# Streamline visualization using contours
+
+plt.contourf(x, y, np.rot90(p, 2), 50, cmap='rainbow')
+contour_lines = plt.contour(x, y, np.rot90(p, 2), 30, colors='black')
+plt.clabel(contour_lines, inline=True, fontsize=8)
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Rainbow-Filled Contours with Contour Lines')
+plt.colorbar(label='Value')
+plt.show()</code></pre>
+										<div class="image main"><img src="images/cfd/streamline simo.png" alt="" /></div>
+
+									</p>
+									
+
+									<p>
+										I would like to thank Dr. Yogesh G Bhumkar for his guidance and constant encouragement towards taking up the challenge to develop the codes
+										instead of using the available commercial codes. His interactive classroom approach has inspired me to venture into this new field. I would 
+										like to take this opportunity to thank my batchmate, Mr. Bharath Ram for helping me out in clutch situations. 
+									</p>
+
+																	
+							</section>
+
+							<header class="major">
+								<h3>Fin.</h3>
+							</header>
+
+							<section class="posts">
+								<article>
+									<header>
+										<h2><a>Projects</a></h2>
+									</header>
+									<a class="image fit"><img src="images/project tenor1.gif" alt="" /></a>
+									<p> All the projects I have been part of and have contributed in, over the past few years. </p>
+									<ul class="actions special">
+										<li><a href="projects.html" class="button">Read More</a></li>
+									</ul>
+								</article>
+								
+								<article>
+									<header>
+										<h2><a>The Other Stuff</a></h2>
+									</header>
+									<a class="image fit"><img src="images/otheristuff.gif" alt="" /></a>
+									<p> I do some stuff other than the useful things. Go ahead and take a peek.</p>
+									<ul class="actions special">
+										<li><a href="other.html" class="button">Read More</a></li>
+									</ul>
+								</article>
+								
+							</section>
+
+						<!-- Footer -->
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section>
+								<h3>Location</h3>
+								<p>Pahadon ke upar, Jungle ke paar</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="tel: +917008631760">+91 7008631760</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="mailto: srirammetta101@gmail.com">srirammetta101@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://www.linkedin.com/in/metta-sriram/" target="_blank" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
+									<li><a href="https://www.instagram.com/m_ess_or/" target="_blank" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="https://github.com/srirammetta101/ " target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; metta-sriram</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

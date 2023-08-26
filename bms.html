@@ -1,0 +1,285 @@
+﻿<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Metta Sriram Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>Welcome to my<br />
+						Portfolio</h1>
+						<p>A space where I keep updating my projects, Big and Small, Good ones and the Bad ones<br />
+						I also add the stuff I want to brag about...</p>
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+				
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li class="active"><a href="projects.html">Projects</a></li>
+							<li><a href="other.html">The Other Stuff</a></li>
+							<li><a href="elements.html">Elements</a></li>
+							
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/metta-sriram/" target="_blank" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
+							<li><a href="https://github.com/srirammetta101/ " target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">			
+
+						<!-- Post -->
+							<section class="post">
+								<h1>Biomedical Systems </h1>
+									<p>I have taken up a lateral course of Biomedical Systems, under Dr. Niladri Bihari Puhan, Associate Professor, School of Electrical Sciences,
+                                        IIT Bhubaneswar. This course was different from my usual courses in the field of Mechanical Engineeing. The course dealt with processing of
+                                        signals and extracting the information required for us. As part of this course, me and a fellow student, Mr. B Venkata Swamy, have worked on
+                                        ECG Signals, to study them and try to detect the abnormalities in the signal and give a warning to the the nearby health professional. 
+                                        Arrhythmic beat classification is mainly used in electrocardiogram (ECG) abnormality detection for identifying heart related problems. 
+                                        ECG signal preprocessing and support vector machine-based arrhythmic beat classification are performed to categorize into Healthy and Unhealthy subjects.
+                                        
+                                    </p>
+
+                                    <p>
+                                        In ECG signal preprocessing, a Threshold Filter is used to achieve high speed and low latency design with less computational elements.
+                                        <a href="https://www.kubios.com/hrv-standard/" target="_blank" >Kubios HRV Standard</a> application is used for HRV feature extraction 
+                                        from preprocessed signal and machine learning techniques are used for performing arrhythmic beat classification. More emphasis is given 
+                                        to the feature, HRV (Heart Rate Variability). HRV is extracted from the ECG signal variations that is more powerful in identification 
+                                        of cardiac disorders and associated diseases. Time domain and frequency domain features can be derived from the extracted HRV features. 
+                                        Our approach for this problem can be categorized as: 
+
+                                        <div class="row">
+                                            <div class="col-20">
+                                                <ol>
+                                                    <li>Collection of raw electrocardiograms (ECG) signal;</li>
+                                                    <li>Preprocessing of ECG signal;</li>
+                                                    <li>R-peak detection;</li>
+                                                    <li>Frequency domain feature extraction from HRV signal; and</li>
+                                                    <li>SVM classification into Healthy and Unhealthy.</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </p>
+
+                                    <p>
+                                        We have used a threshold filter for pre-processing the signal and further filtered it to detect R Peaks. The following code is written in MATLAB:
+                                    </p>
+                                    <pre><code>clear ecg samplingrate corrected filtered1 peaks1 filtered2 peaks2 fresult;
+
+switch(demo)
+    case 1,
+        plotname = 'Sample 1';
+        load '100.txt';
+    case 3,
+        plotname = 'Sample 2';
+        load 'ecg.txt';
+end
+
+% Remove lower frequencies
+fresult=fft(ecg);
+fresult(1 : round(length(fresult)*5/samplingrate))=0;
+fresult(end - round(length(fresult)*5/samplingrate) : end)=0;
+corrected=real(ifft(fresult));
+
+% Filter - first pass
+WinSize = floor(samplingrate * 571 / 1000);
+if rem(WinSize,2)==0
+    WinSize = WinSize+1;
+end
+filtered1=ecgdemowinmax(corrected, WinSize);
+
+% Scale ecg
+peaks1=filtered1/(max(filtered1)/7);
+
+% Filter by threshold filter
+for data = 1:1:length(peaks1)
+    if peaks1(data) &lt; 4
+        peaks1(data) = 0;
+    else
+        peaks1(data)=1;
+    end
+end
+positions=find(peaks1);
+distance=positions(2)-positions(1);
+
+% Returns minimum distance between two peaks
+for data=1:1:length(positions)-1
+    if positions(data+1)-positions(data)&lt;distance
+        distance= positions(data+1)-positions(data);
+    end
+end
+
+% Optimize filter window size
+QRdistance=floor(0.04*samplingrate);
+if rem(QRdistance,2)==0
+    QRdistance=QRdistance+1;
+end
+WinSize=2*distance-QRdistance;
+
+% Filter - second pass
+filtered2=ecgdemowinmax(corrected, WinSize);
+peaks2=filtered2;
+for data=1:1:length(peaks2)
+    if peaks2(data)&lt;4
+        peaks2(data)=0;
+    else
+        peaks2(data)=1;
+    end
+end</code></pre>
+
+                                    <p>
+                                        We were able to locate R Peaks in the signal and further sent this R-R Interval ASCII files to the application KUBIOS HRV 
+                                        Standard. We were able to extract Heart Rate Variability (HRV) features. There are 14 well known time domain and frequency domain HRV 
+                                        features. Time domain HRV parameters used are RR mean (ms), RR Std (ms), HR mean (bpm), HR STD (bpm), RMSSD (ms), NN50, pNN50, HRV 
+                                        Triangular Index, TINN (ms). Frequency domain parameters used are: VLF Power (ms2), LF Power (ms2), HF Power (ms2) and LF/HF Ratio. 
+                                        Power Description for VLF is from 0Hz to 0.04Hz, for LF it is from 0.04Hz to 0.15Hz and for HF it is 0.15Hz to 0.4Hz.
+                                        HRV extraction from the ECG file of a Young Adult looked like this: <br />
+                                        <br />
+                                        <img src="images/bms/youngadult.jpg" alt=""/>
+                                    </p>
+
+                                    <div class="box alt">
+										<div class="row gtr-50 gtr-uniform">
+											<div class="col-6"><span class="image fit"><img src="images/bms/timedomainf.jpg" alt="" /></span></div>
+											<div class="col-6"><span class="image fit"><img src="images/bms/freqdomainf.jpg" alt="" /></span></div>
+											<!-- Break-->
+											<div class="col-6"><span><header class="major"> <p> <b>Time Domain Features</b></p> </header> </span></div>
+                                            <div class="col-6"><span><header class="major"> <p> <b>Frequency Domain Features</b></p> </header> </span></div>
+										</div>
+									</div>
+					
+									<p>
+										<span class="image right"><img src="images/bms/csv file.jpg" alt="" /></span>
+										After the extraction of HRV features, we have exported those parameters as .csv (comma delimited) file, as shown here.
+                                        Thereby, we have trained the Classifiers with our samples and exported the data as a function called trainedfunction to determine the health of ECG.
+                                        The code is as follows:
+                                        <pre><code>p = readtable('ECG with parameters.csv');
+sampleTable = table(SDNN, RMSSD, HRV Triangular Index, VLF, LF, HF, LF/HF);
+yfit = trainedclassifier.predictFcn(sampleTable);</code></pre>
+									</p>
+
+                                    <p>
+										Using the data obtained till now, we can determine if the ECG belongs to Healthy or an Unhealthy person. The Support Vector Machine (SVM) is widely used for 
+                                        classification of features extracted from ECG data compared to other machine learning techniques such as decision tree classifier, genetic algorithm and deep learning. 
+                                        K-Nearest-Neighbor (KNN) Rule is widely recognized as a sample classification technique in many applications. In the SVM classification-based abnormality detection 
+                                        method, extracted R peaks are considered after performing ECG signal preprocessing. Few existing techniques are time-consuming and require complex computations. 
+                                        In addition, morphological ECG features are not feasible while dealing with noisy data. After Classification and training, our plot looked like this: <br />
+                                        <h3 class=" image fit"><img src="images/bms/svm.jpg" alt="" /> </h3>
+                                    </p>
+
+                                    <p>
+                                        <span class="image right"><img src="images/bms/accuracy 40.png" alt="" /></span>
+										Accuracy of several classifiers we have trained are shown here, with Quadratic SVM classifier having the highest accuracy. The obtained beat rate and HRV Frequency domain 
+                                        features are applied to SVM classifier for arrhythmic beat classification which is simpler than other machine learning approaches. Various classification techniques 
+                                        based on knowledge-based system, KNN and SVM are used using parameters such as ECG and HRV. The experimental result of SVM based classifier gives a maximum accuracy of 96 %, whereas
+                                        the maximum classification accuracy is 93.3% on classifying normal and arrhythmic risk abnormal subjects.
+                                    </p>
+
+                                    <p>
+                                        I would like to thank Dr. Niladri Bihari Puhan for his constant support and encouragement in taking up this challenge, despite my lack of experience in the domain. I would
+                                        also like to take this opportunity to thank my friend, Mr. B Venkata Swamy for his support in the project. This whole work was inspired from the research papers
+                                        written by <a href="https://doi.org/10.1109/ACCESS.2018.2794346" target="_blank">Venkatesh et al.</a> and <a href="https://doi.org/10.1016/j.patrec.2015.11.018" target="_blank">Afkhami et al.</a> 
+                                    </p>
+
+																	
+							</section>
+
+							<header class="major">
+								<h3>Fin.</h3>
+							</header>
+
+							<section class="posts">
+								<article>
+									<header>
+										<h2><a>Projects</a></h2>
+									</header>
+									<a class="image fit"><img src="images/project tenor1.gif" alt="" /></a>
+									<p> All the projects I have been part of and have contributed in, over the past few years. </p>
+									<ul class="actions special">
+										<li><a href="projects.html" class="button">Read More</a></li>
+									</ul>
+								</article>
+								
+								<article>
+									<header>
+										<h2><a>The Other Stuff</a></h2>
+									</header>
+									<a class="image fit"><img src="images/otheristuff.gif" alt="" /></a>
+									<p> I do some stuff other than the useful things. Go ahead and take a peek.</p>
+									<ul class="actions special">
+										<li><a href="other.html" class="button">Read More</a></li>
+									</ul>
+								</article>
+								
+							</section>
+
+						<!-- Footer -->
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section>
+								<h3>Location</h3>
+								<p>Pahadon ke upar, Jungle ke paar</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="tel: +917008631760">+91 7008631760</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="mailto: srirammetta101@gmail.com">srirammetta101@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://www.linkedin.com/in/metta-sriram/" target="_blank" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
+									<li><a href="https://www.instagram.com/m_ess_or/" target="_blank" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="https://github.com/srirammetta101/ " target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; metta-sriram</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

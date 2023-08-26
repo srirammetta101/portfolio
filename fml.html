@@ -1,0 +1,192 @@
+﻿<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Metta Sriram Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>Welcome to my<br />
+						Portfolio</h1>
+						<p>A space where I keep updating my projects, Big and Small, Good ones and the Bad ones<br />
+						I also add the stuff I want to brag about...</p>
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+				
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li class="active"><a href="projects.html">Projects</a></li>
+							<li><a href="other.html">The Other Stuff</a></li>
+							<li><a href="elements.html">Elements</a></li>
+							
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/metta-sriram/" target="_blank" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
+							<li><a href="https://github.com/srirammetta101/ " target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">			
+
+						<!-- Post -->
+							<section class="post">
+								<h1>Medical Spirometer </h1>
+									<p>
+                                        As part of Fluid Mechanics Laboratory Course in the 3<sup>rd</sup> semester under Dr. Venugopal Arumuru, Assistant Professor, School of Mechanical Sciences.
+                                        We have taken up a project as part of the Laboratory course to practically apply the concepts of Fluid Mechanics. I was joined by my batchmates, Mr. 
+                                        Shivam Handa, Mr. PVS Hemanth and Mr. Aqib Mujtaba in this project. We have taken up the topic of 
+                                        Medical Spirometer for studying the Pascals Law and its practical application. A medical spirometer is a diagnostic device used to measure 
+                                        lung function. It assesses the lung capacity, airflow rates, and volume variations during breathing. It is a valuable device for diagnosing and managing 
+                                        respiratory conditions like asthma and COPD. Spirometers aid in treatment planning and monitoring progress through objective lung 
+                                        function measurements. 
+                                    </p>
+										
+									<p>
+										<span class="image right"><img src="images/fml2.png" alt="" /></span>
+										<b>Working Principle</b> <br/>
+                                        As shown in the figure here, the system consists of a mouth piece at a height higher than the level of the water in the tank. The fluid used for this purpose
+                                        was water. However, the fluid can be changed to some other fluid with a lower density for the ease of the user.  
+                                        As a person expells out air from the mouth pipe,the pressure of air pushes water in the left limb down leading to rise in water level in the water 
+                                        tank initially for a small time and then the water level will fall due to back pressure.
+                                    </p>
+
+                                    <p>
+                                        <span class="image right"><img src="images/fml3.PNG" alt="" /></span>
+                                        An ultrasonic sensor (HC-SR04) has been attached on top of the container with the fluid in it. The container was taken with a cylindrical shape
+                                        to ensure uniformity in the rise and fall of the fluid levels. The sensor is controlled with an Arduino Uno board to take the readings of the changes
+                                        in the levels, as the user blows air into the mouthpiece. The sensor works in a way similar to SONAR in submarines. The HC-SR04 is often compared to 
+                                        a chatty bat: it sends out sound waves, waits for them to bounce back after hitting an object, and then calculates how far away the object is 
+                                        based on the time it took for the echoes to return. The layout and the code were developed using the <a href="https://www.circuito.io/app/" target="_blank">Circuito website</a>
+                                    </p>
+
+                                    <p>
+                                        The code developed for this project tries to plot the values of the rise in water levels and find the peak to determine the lung capacity.
+                                        This data is thereby, calibrated with a dataset of healthy people to ensure there is no discrepancy in the design of the project. The code used 
+                                        is given here: 
+
+                                        <pre><code>#include &lt;NewPing.h&gt;
+
+#define HCSR04_PIN_TRIG 3
+#define HCSR04_PIN_ECHO 2
+
+NewPing hcsr04(HCSR04_PIN_TRIG, HCSR04_PIN_ECHO);
+
+void setup() 
+    {
+        Serial.begin(9600);
+    }
+
+void loop() 
+    {
+        int distance = hcsr04.ping_cm();
+        Serial.println(distance); // Send distance value to Serial Plotter
+        delay(100); // Adjust the delay as needed
+    }</code></pre>
+                                    
+                                    Even though we have finished the preparation and the code for the project, we were not able to finish the prototype of this model. I would
+                                    like to thank Dr. Venugopal Arumuru for the opportunity he has provided us and for the constant support and guidance through the project. I 
+                                    would also like to take this opportunity to thank my team members for their encouragement and support throughout the project duration. 
+                                    </p>
+
+																	
+							</section>
+
+							<header class="major">
+								<h3>Fin.</h3>
+							</header>
+
+							<section class="posts">
+								<article>
+									<header>
+										<h2><a>Projects</a></h2>
+									</header>
+									<a class="image fit"><img src="images/project tenor1.gif" alt="" /></a>
+									<p> All the projects I have been part of and have contributed in, over the past few years. </p>
+									<ul class="actions special">
+										<li><a href="projects.html" class="button">Read More</a></li>
+									</ul>
+								</article>
+								
+								<article>
+									<header>
+										<h2><a>The Other Stuff</a></h2>
+									</header>
+									<a class="image fit"><img src="images/otheristuff.gif" alt="" /></a>
+									<p> I do some stuff other than the useful things. Go ahead and take a peek.</p>
+									<ul class="actions special">
+										<li><a href="other.html" class="button">Read More</a></li>
+									</ul>
+								</article>
+								
+							</section>
+
+						<!-- Footer -->
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section>
+								<h3>Location</h3>
+								<p>Pahadon ke upar, Jungle ke paar</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="tel: +917008631760">+91 7008631760</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="mailto: srirammetta101@gmail.com">srirammetta101@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://www.linkedin.com/in/metta-sriram/" target="_blank" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
+									<li><a href="https://www.instagram.com/m_ess_or/" target="_blank" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="https://github.com/srirammetta101/ " target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; metta-sriram</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
